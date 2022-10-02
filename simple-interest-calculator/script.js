@@ -1,4 +1,4 @@
-let amount = document.querySelector('#principal')       
+    
 let rate = document.querySelector('#rate')
 let rateText = document.querySelector('.rate')
 let selectYear  = document.querySelector('#year')
@@ -25,26 +25,32 @@ for(i in range){
 // Make the button compute interest
 button.addEventListener('click', (e)=> {
     e.preventDefault();
+    let amount = document.querySelector('#principal')   
     amount = parseFloat(amount.value)
-    if(!amount || amount === 0 || amount.value === `-${amount}`) {
+    if(!amount || amount === "" || amount === '0' || Math.sign(amount) === -1 ) {
         alert('Please enter a positive number')
-    }else if(!rateValue){
-        alert('Please select a rate')
-    }else if(!yearValue){
-        alert('Please select a year')
     }else{
-        let interest = (amount * yearValue * rateValue)/100
-        let span1 = document.querySelector('.one')
-        let span2 = document.querySelector('.two')
-        let span3 = document.querySelector('.three')
-        let span4 = document.querySelector('.four')
-        let newDate = new Date().getFullYear() + yearValue
-        span1.innerHTML = `${amount},`
-        span2.innerHTML = `${rateValue}%,`
-        span3.innerHTML = `${interest},`
-        span4.innerHTML = newDate
-        result.style.display = 'block'
-    }            
+        if(!rateValue){
+            alert('Please select a rate')
+        }else{
+            if(!yearValue){
+                alert('Please select a year')
+            }else{
+                let interest = (amount * yearValue * rateValue)/100
+                let span1 = document.querySelector('.one')
+                let span2 = document.querySelector('.two')
+                let span3 = document.querySelector('.three')
+                let span4 = document.querySelector('.four')
+                let newDate = new Date().getFullYear() + yearValue
+                span1.innerHTML = `${amount},`
+                span2.innerHTML = `${rateValue}%,`
+                span3.innerHTML = `${interest},`
+                span4.innerHTML = newDate
+                result.style.display = 'block'
+            }
+        }
+    }
+    console.log(amount)   
 })
 
 
@@ -53,7 +59,7 @@ let rateValue;
 
 // Get the value of the year
 selectYear.addEventListener('change', (e)=> {
-    yearValue =  parseInt(e.target.value)
+    yearValue =  parseFloat(e.target.value)
 })
 
 // Get the rate
